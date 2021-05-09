@@ -350,9 +350,11 @@ fn chrono_faker() {
     println!("{}", between);
 }
 
+#[cfg(feature = "semver")]
 fn filesystem_faker() {
     use fake::faker::filesystem::raw::*;
     use std::path::PathBuf;
+    use fake::Faker;
 
     let val: String = FilePath(EN).fake();
     println!("{:?}", val);
@@ -370,6 +372,21 @@ fn filesystem_faker() {
     println!("{:?}", val);
 
     let val: PathBuf = DirPath(EN).fake();
+    println!("{:?}", val);
+
+    // return X.Y.Z or X-Y-Z-V.W (V equals "rc", "beta" or "alpha")
+    let val: String = Semver(EN).fake();
+    println!("{:?}", val);
+
+    // return X.Y.Z
+    let val: String = SemverStable(EN).fake();
+    println!("{:?}", val);
+
+    // return X-Y-Z-V.W
+    let val: String = SemverUnstable(EN).fake();
+    println!("{:?}", val);
+
+    let val: semver::Version = Faker.fake();
     println!("{:?}", val);
 }
 
@@ -396,8 +413,10 @@ fn main() {
     internet_faker();
     number_faker();
     phone_number_faker();
-    filesystem_faker();
     currency_faker();
+
+    #[cfg(feature = "semver")]
+    filesystem_faker();
 
     #[cfg(feature = "http")]
     http_faker();
