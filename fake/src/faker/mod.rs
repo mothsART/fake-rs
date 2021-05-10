@@ -71,6 +71,17 @@ pub mod boolean {
     }
 }
 
+pub mod color {
+    def_fakers! {
+        HexColor();
+        RgbColor();
+        RgbaColor();
+        HslColor();
+        HslaColor();
+        Color();
+    }
+}
+
 #[cfg(feature = "chrono")]
 pub mod chrono {
     def_fakers! {
@@ -121,7 +132,6 @@ pub mod internet {
         IPv6();
         IP();
         MACAddress();
-        Color();
         UserAgent();
     }
 }

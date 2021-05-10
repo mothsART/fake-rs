@@ -1,6 +1,7 @@
 mod address;
 mod administrative;
 mod boolean;
+mod color;
 #[cfg(feature = "chrono")]
 mod chrono;
 mod company;
